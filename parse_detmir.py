@@ -12,7 +12,7 @@ def print_pdf():
    pages = pdf.getNumPages()   
    print (info)
    print ("number of pages: %i" % pages)   
-   page1 = pdf.getPage(0)
+   page1 = pdf.getPage(5)
    print(page1)
    print(page1.extractText())
 
