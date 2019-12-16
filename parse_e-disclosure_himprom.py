@@ -2,8 +2,7 @@
 
 # http://www.e-disclosure.ru/Event/Page?companyId=5727&year=2019
  
-from bs4 import BeautifulSoup
-import requests
+
 
 #disclosure_himprom = "http://www.e-disclosure.ru/portal/company.aspx?id=5727"
 #disclosure_himprom = "input\himprom_2019.html"
@@ -14,7 +13,7 @@ from bs4 import BeautifulSoup
 import csv
 # pip install beautifulsoup4
 # pip install lxml
-
+import re
 
 # with open(disclosure_himprom, "r", encoding="utf-8") as f:
     
@@ -61,6 +60,16 @@ if __name__ == '__main__':
   if data_links is not None:
     for link in data_links:
       print("---------------------------------------------------------------")
-      print(get_bsoup_in_report(get_html(link)))
+      data = get_bsoup_in_report(get_html(link))
+      #print(data)
+	  # находим дату и дивиденд
+      # пример	  
+	  # Размер дивиденда, начисленного на одну привилегированную именную акции типа А – 0,142 рубля.
+	  # Размер дивиденда, начисленного на одну привилегированную акцию типа А -0,0882 рубля.
+      date = re.findall(r'\d{2}\.\d{2}\.\d{4}', data)[-1]
+      print(date)
+      res = re.findall(r'Размер дивиденда, начисленного на одну привилегированную акцию.*Общий размер', str(data))
+      print(res)
+        #print(i)
       
   
